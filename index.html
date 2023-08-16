@@ -1,5 +1,7 @@
 <html>
     <head>
+      <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
       <style data-tag="reset-style-sheet">
         html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
       </style>
@@ -30,7 +32,7 @@
     </head>
        
     </head>
-    <body onload="setInterval(getLocation(), 1000)">
+    <body onload="getLocation()">
 
         <button onclick="getLocation()">get location</button>
         <button onclick="getCords()">get Cords</button>
@@ -39,15 +41,15 @@
         <div>
           <link href="./home.css" rel="stylesheet" />
           <div class="home-container">
-            <div class="home-container1">
+            <div class="home-container01">
               <div class="home-feature-card">
                 <h1 id="day 0">Day</h1>
                 <h2 id="temp 0" class="home-text01">Temp</h2>
                 <span id="info 0" class="home-text02">Info</span>
                 <span class="home-text03">SEE MORE</span>
               </div>
-              <div class="home-container2">
-                <div class="home-feature-card01">
+              <div class="home-container02">
+                <div class="home-feature-card1">
                   <svg viewBox="0 0 1024 1024" class="home-icon">
                     <path
                       d="M439.424 225.92c8.32-8.363 19.157-12.544 30.123-12.587s21.845 4.096 30.208 12.416 12.544 19.157 12.587 30.123-4.096 21.845-12.416 30.208c-8.192 8.277-18.859 12.459-29.739 12.587h-384.853c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667h385.835c32.341-0.384 64.683-12.971 89.301-37.76 24.917-25.045 37.333-57.941 37.205-90.624s-12.715-65.493-37.76-90.411-57.899-37.291-90.581-37.205-65.493 12.715-90.411 37.76c-16.64 16.725-16.555 43.733 0.171 60.331s43.733 16.512 60.331-0.171zM506.923 858.24c24.917 25.045 57.685 37.675 90.411 37.76s65.579-12.331 90.624-37.205 37.675-57.685 37.76-90.411-12.331-65.579-37.205-90.624c-24.619-24.789-56.96-37.376-89.301-37.76h-513.877c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667h512.853c10.88 0.128 21.547 4.309 29.781 12.587 8.32 8.363 12.459 19.243 12.416 30.208s-4.224 21.803-12.587 30.123-19.243 12.459-30.208 12.416-21.803-4.224-30.123-12.587c-16.597-16.725-43.648-16.811-60.331-0.171s-16.811 43.648-0.171 60.331zM786.603 360.021c12.544-12.501 28.843-18.688 45.269-18.688s32.725 6.272 45.227 18.816 18.688 28.843 18.688 45.269-6.272 32.725-18.816 45.227c-12.459 12.459-28.715 18.645-45.099 18.688l-746.539-0c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667h746.752c38.016-0.085 76.117-14.592 105.216-43.605 29.184-29.099 43.819-67.371 43.861-105.557s-14.507-76.459-43.605-105.643-67.413-43.819-105.557-43.861-76.459 14.507-105.643 43.605c-16.683 16.64-16.725 43.648-0.085 60.331s43.648 16.725 60.331 0.085z"
@@ -56,8 +58,8 @@
                   <span id="winds" class="home-text04">Speed</span>
                   <span id="windd" class="home-text05">Direction</span>
                 </div>
-                <div class="home-feature-card02">
-                  <svg viewBox="0 0 1024 1024" class="home-icon2">
+                <div class="home-feature-card2">
+                  <svg viewBox="0 0 1024 1024" class="home-icon02">
                     <path
                       d="M864.626 473.162c-65.754-183.44-205.11-348.15-352.626-473.162-147.516 125.012-286.87 289.722-352.626 473.162-40.664 113.436-44.682 236.562 12.584 345.4 65.846 125.14 198.632 205.438 340.042 205.438s274.196-80.298 340.040-205.44c57.27-108.838 53.25-231.962 12.586-345.398zM738.764 758.956c-43.802 83.252-132.812 137.044-226.764 137.044-55.12 0-108.524-18.536-152.112-50.652 13.242 1.724 26.632 2.652 40.112 2.652 117.426 0 228.668-67.214 283.402-171.242 44.878-85.292 40.978-173.848 23.882-244.338 14.558 28.15 26.906 56.198 36.848 83.932 22.606 63.062 40.024 156.34-5.368 242.604z"
                     ></path>
@@ -65,8 +67,8 @@
                   <span id="per" class="home-text06">Amount</span>
                   <span class="home-text07">SEE MORE</span>
                 </div>
-                <div class="home-feature-card03">
-                  <svg viewBox="0 0 1024 1024" class="home-icon4">
+                <div class="home-feature-card3">
+                  <svg viewBox="0 0 1024 1024" class="home-icon04">
                     <path
                       d="M810.667 213.333c-23.595 0-42.667 19.072-42.667 42.667s19.072 42.667 42.667 42.667c23.552 0 42.667 19.115 42.667 42.667s-19.115 42.667-42.667 42.667h-469.333c-23.595 0-42.667 19.072-42.667 42.667s19.072 42.667 42.667 42.667h256c23.552 0 42.667 19.115 42.667 42.667s-19.115 42.667-42.667 42.667h-273.067c-70.571 0-128 57.429-128 128s57.429 128 128 128c23.595 0 42.667-19.072 42.667-42.667s-19.072-42.667-42.667-42.667c-23.552 0-42.667-19.115-42.667-42.667s19.115-42.667 42.667-42.667h273.067c70.571 0 128-57.429 128-128 0-15.061-3.072-29.269-7.893-42.667h93.227c70.571 0 128-57.429 128-128s-57.429-128-128-128z"
                     ></path>
@@ -76,61 +78,74 @@
                 </div>
               </div>
             </div>
-            <div class="home-container3">
-              <div class="home-feature-card04">
-                <h1 id="htemp 0">Temp</h1>
-                <h2 id="hour 0" class="home-text11">Day</h2>
-                <span id="hinfo 0" class="home-text12">info</span>
+            <div class="home-container03">
+              <div class="home-feature-card4">
+                <h1 id="temp 1">Temp</h1>
+                <h2 id="day 1" class="home-text11">Day</h2>
+                <span id="info 1" class="home-text12">info</span>
+                <span id="more 1" class="home-text13">SEE MORE</span>
               </div>
-              <div class="home-feature-card05">
-                <h1 id="htemp 1">Temp</h1>
-                <h2 id="hour 1" class="home-text14">Day</h2>
-                <span id="hinfo 1" class="home-text15">info</span>
+              <div class="home-feature-card5">
+                <h1 id="temp 2">Temp</h1>
+                <h2 id="day 2" class="home-text15">Day</h2>
+                <span id="info 2" class="home-text16">info</span>
+                <span id="more 1" class="home-text17">SEE MORE</span>
               </div>
-              <div class="home-feature-card06">
-                <h1 id="htemp 2">Temp</h1>
-                <h2 id="hour 2" class="home-text17">Day</h2>
-                <span id="hinfo 2" class="home-text18">info</span>
+              <div class="home-feature-card6">
+                <h1 id="temp 3">Temp</h1>
+                <h2 id="day 3" class="home-text19">Day</h2>
+                <span id="info 3" class="home-text20">info</span>
+                <span id="more 1" class="home-text21">SEE MORE</span>
               </div>
-              <div class="home-feature-card07">
-                <h1 id="htemp 3">Temp</h1>
-                <h2 id="hour 3" class="home-text20">Day</h2>
-                <span id="hinfo 3" class="home-text21">info</span>
-              </div>
-              <div class="home-feature-card08">
-                <h1 id="htemp 3">Temp</h1>
-                <h2 id="hour 3" class="home-text23">Day</h2>
-                <span id="hinfo 3" class="home-text24">info</span>
+              <div class="home-feature-card7">
+                <h1 id="temp 4">Temp</h1>
+                <h2 id="day 4" class="home-text23">Day</h2>
+                <span id="info 4" class="home-text24">info</span>
+                <span id="more 1" class="home-text25">SEE MORE</span>
               </div>
             </div>
-            <div class="home-container4">
-              <div class="home-feature-card09">
-                <h1 id="temp 1">Temp</h1>
-                <h2 id="day 1" class="home-text26">Day</h2>
-                <span id="info 1" class="home-text27">info</span>
-                <span id="more 1" class="home-text28">SEE MORE</span>
+            <div id="map" class="home-container04" >
+              <button id="cloud" class="home-container05" onclick="setKind('radar')">
+                <svg viewBox="0 0 1024 1024" class="home-icon06">
+                  <path
+                    d="M640 554.667v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM298.667 554.667v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM469.333 640v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM870.443 746.496c64.725-28.373 111.915-80.341 135.723-141.312s24.405-131.157-3.925-195.883c-24.491-55.936-66.688-98.859-117.419-124.8-35.669-18.261-75.52-28.16-116.48-28.501h-22.528c-30.933-87.765-91.435-158.208-167.040-202.795-84.608-49.877-188.373-67.499-291.029-41.003s-184.917 92.203-234.795 176.811-67.499 188.373-41.003 291.029c21.717 84.053 69.717 154.581 132.224 204.075 18.475 14.635 45.312 11.52 59.947-6.955s11.52-45.312-6.955-59.947c-48.299-38.272-85.675-92.971-102.613-158.549-20.608-79.829-6.955-160.427 31.915-226.347s102.741-116.864 182.613-137.515 160.469-6.955 226.347 31.915 116.864 102.741 137.515 182.613c4.907 18.56 21.547 32 41.301 32h53.419c27.605 0.213 54.4 6.912 78.251 19.115 33.835 17.323 61.824 45.781 78.165 83.072 18.901 43.179 18.56 89.856 2.645 130.603s-47.317 75.307-90.496 94.208c-21.589 9.472-31.403 34.603-21.973 56.192s34.603 31.403 56.192 21.973z"
+                  ></path>
+                </svg>
+              </button>
+              <button id="cloud" class="home-container06" onclick = "setKind('satellite')">
+                <svg viewBox="0 0 1024 1024" class="home-icon08">
+                  <path
+                    d="M826 428q82 6 140 67t58 145q0 88-63 151t-151 63h-554q-106 0-181-75t-75-181q0-94 67-169t161-85q42-78 118-126t166-48q108 0 201 76t113 182z"
+                  ></path>
+                </svg>
+              </button>
+              <div id="&lt;" class="home-container07">
+                <svg viewBox="0 0 1024 1024" class="home-icon10">
+                  <path
+                    d="M512 1024c282.77 0 512-229.23 512-512s-229.23-512-512-512-512 229.23-512 512 229.23 512 512 512zM512 96c229.75 0 416 186.25 416 416s-186.25 416-416 416-416-186.25-416-416 186.25-416 416-416zM704 672l-224-160 224-160zM448 672l-224-160 224-160z"
+                  ></path>
+                </svg>
               </div>
-              <div class="home-feature-card10">
-                <h1 id="temp 2">Temp</h1>
-                <h2 id="day 2" class="home-text30">Day</h2>
-                <span id="info 2" class="home-text31">info</span>
-                <span id="more 1" class="home-text32">SEE MORE</span>
+              <div id="&gt;" class="home-container08">
+                <svg viewBox="0 0 1024 1024" class="home-icon12">
+                  <path
+                    d="M512 0c-282.77 0-512 229.23-512 512s229.23 512 512 512 512-229.23 512-512-229.23-512-512-512zM512 928c-229.75 0-416-186.25-416-416s186.25-416 416-416 416 186.25 416 416-186.25 416-416 416zM320 352l224 160-224 160zM576 352l224 160-224 160z"
+                  ></path>
+                </svg>
               </div>
-              <div class="home-feature-card11">
-                <h1 id="temp 3">Temp</h1>
-                <h2 id="day 3" class="home-text34">Day</h2>
-                <span id="info 3" class="home-text35">info</span>
-                <span id="more 1" class="home-text36">SEE MORE</span>
+              <div id="play" class="home-container09">
+                <svg viewBox="0 0 1024 1024" class="home-icon14">
+                  <path d="M342 214l468 298-468 298v-596z"></path>
+                </svg>
               </div>
-              <div class="home-feature-card12">
-                <h1 id="temp 4">Temp</h1>
-                <h2 id="day 4" class="home-text38">Day</h2>
-                <span id="info 4" class="home-text39">info</span>
-                <span id="more 1" class="home-text40">SEE MORE</span>
-              </div>
+              <div id="mapid" class="home-container10"></div>
             </div>
           </div>
         </div>
+        
+        
+
+        
         <style>
           .home-container {
   width: 100%;
@@ -609,6 +624,7 @@ export default Home
         
         
         <script>
+        
             let longitude = null;
             let latitude = null;
             let flink=null;
@@ -622,14 +638,7 @@ export default Home
             let windd=null;
             let per = null;
             let dew = null;
-            function all(){
-              
-             
-              
-              getLocation();
-              
-              
-            }
+            let loc = null;
                 function getLocation(){
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(
@@ -638,18 +647,21 @@ export default Home
                             longitude = position.coords.longitude;
                             console.log("Latitude:", latitude);
                             console.log("Longitude:", longitude);
-                            
+                           
                             // Use the latitude and longitude values in your code
                             getCords();
+                            init();
+                            //L.map('mapid').setView(latlng, 6);
+                            return true;
                         },
                             (error) => {
                             console.error("Error getting geolocation:", error);
-                            
+                            return false;
                         }
                         );
                         } else {
                             console.error("Geolocation is not supported by this browser.");
-                            
+                            return false
                         }
                     
                 }
@@ -705,6 +717,9 @@ export default Home
                         document.getElementById("temp "+i).innerHTML = temp + "°F";
                         document.getElementById("day "+i).innerHTML = name;
                         document.getElementById("info "+i).innerHTML = df;
+                        console.log("hello world");
+                       
+
                     })
                   
                     .catch((error) => {
@@ -714,15 +729,250 @@ export default Home
                     
                 }
                 
-                   
-                
 
-
-            
-            
+          
+         
           
 
         </script>
+        
+          <script>
+            var map = null
+            function init(){
+                map = L.map('mapid').setView([latitude, longitude], 6);
+
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attributions: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+              }).addTo(map);
+              /**
+              * Load all the available maps frames from RainViewer API
+              */
+             var apiRequest = new XMLHttpRequest();
+             apiRequest.open("GET", "https://api.rainviewer.com/public/weather-maps.json", true);
+              apiRequest.onload = function(e) {
+              // store the API response for re-use purposes in memory
+            apiData = JSON.parse(apiRequest.response);
+            initialize(apiData, optionKind);
+              };
+          apiRequest.send();
+
+            }
+   
+    
+    /**
+     * RainViewer radar animation part
+     * @type {number[]}
+     */
+    var apiData = {};
+    var mapFrames = [];
+    var lastPastFramePosition = -1;
+    var radarLayers = [];
+
+    var optionKind = 'radar'; // can be 'radar' or 'satellite'
+
+    var optionTileSize = 256; // can be 256 or 512.
+    var optionColorScheme = 2; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
+    var optionSmoothData = 1; // 0 - not smooth, 1 - smooth
+    var optionSnowColors = 1; // 0 - do not show snow colors, 1 - show snow colors
+
+    var animationPosition = 0;
+    var animationTimer = false;
+
+    var loadingTilesCount = 0;
+    var loadedTilesCount = 0;
+    var kind = true;
+
+    function startLoadingTile() {
+        loadingTilesCount++;    
+    }
+    function finishLoadingTile() {
+        // Delayed increase loaded count to prevent changing the layer before 
+        // it will be replaced by next
+        setTimeout(function() { loadedTilesCount++; }, 250);
+    }
+    function isTilesLoading() {
+        return loadingTilesCount > loadedTilesCount;
+    }
+
+   
+
+    /**
+     * Initialize internal data from the API response and options
+     */
+    function initialize(api, kind) {
+        // remove all already added tiled layers
+        for (var i in radarLayers) {
+            map.removeLayer(radarLayers[i]);
+        }
+        mapFrames = [];
+        radarLayers = [];
+        animationPosition = 0;
+
+        if (!api) {
+            return;
+        }
+        if (kind == 'satellite' && api.satellite && api.satellite.infrared) {
+            mapFrames = api.satellite.infrared;
+
+            lastPastFramePosition = api.satellite.infrared.length - 1;
+            showFrame(lastPastFramePosition, true);
+        }
+        else if (api.radar && api.radar.past) {
+            mapFrames = api.radar.past;
+            if (api.radar.nowcast) {
+                mapFrames = mapFrames.concat(api.radar.nowcast);
+            }
+
+            // show the last "past" frame
+            lastPastFramePosition = api.radar.past.length - 1;
+            showFrame(lastPastFramePosition, true);
+        }
+    }
+
+    /**
+     * Animation functions
+     * @param path - Path to the XYZ tile
+     */
+    function addLayer(frame) {
+        if (!radarLayers[frame.path]) {
+            var colorScheme = optionKind == 'satellite' ? 0 : optionColorScheme;
+            var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
+            var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
+
+            var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
+                tileSize: 256,
+                opacity: 0.01,
+                zIndex: frame.time
+            });
+
+            // Track layer loading state to not display the overlay 
+            // before it will completelly loads
+            source.on('loading', startLoadingTile);
+            source.on('load', finishLoadingTile); 
+            source.on('remove', finishLoadingTile);
+
+            radarLayers[frame.path] = source;
+        }
+        if (!map.hasLayer(radarLayers[frame.path])) {
+            map.addLayer(radarLayers[frame.path]);
+        }
+    }
+
+    /**
+     * Display particular frame of animation for the @position
+     * If preloadOnly parameter is set to true, the frame layer only adds for the tiles preloading purpose
+     * @param position
+     * @param preloadOnly
+     * @param force - display layer immediatelly
+     */
+    function changeRadarPosition(position, preloadOnly, force) {
+        while (position >= mapFrames.length) {
+            position -= mapFrames.length;
+        }
+        while (position < 0) {
+            position += mapFrames.length;
+        }
+
+        var currentFrame = mapFrames[animationPosition];
+        var nextFrame = mapFrames[position];
+
+        addLayer(nextFrame);
+
+        // Quit if this call is for preloading only by design
+        // or some times still loading in background
+        if (preloadOnly || (isTilesLoading() && !force)) {
+            return;
+        }
+
+        animationPosition = position;
+
+        if (radarLayers[currentFrame.path]) {
+            radarLayers[currentFrame.path].setOpacity(0);
+        }
+        radarLayers[nextFrame.path].setOpacity(100);
+
+
+        var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
+
+        //document.getElementById("timestamp").innerHTML = pastOrForecast + ': ' + (new Date(nextFrame.time * 1000)).toString();
+    }
+
+    /**
+     * Check avialability and show particular frame position from the timestamps list
+     */
+    function showFrame(nextPosition, force) {
+        var preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
+
+        changeRadarPosition(nextPosition, false, force);
+
+        // preload next next frame (typically, +1 frame)
+        // if don't do that, the animation will be blinking at the first loop
+        changeRadarPosition(nextPosition + preloadingDirection, true);
+    }
+
+    /**
+     * Stop the animation
+     * Check if the animation timeout is set and clear it.
+     */
+    function stop() {
+        if (animationTimer) {
+            clearTimeout(animationTimer);
+            animationTimer = false;
+            return true;
+        }
+        return false;
+    }
+
+    function play() {
+        showFrame(animationPosition + 1);
+
+        // Main animation driver. Run this function every 500 ms
+        animationTimer = setTimeout(play, 300);
+    }
+
+    function playStop() {
+        if (!stop()) {
+            play();
+        } 
+    }
+
+    /**
+     * Change map options
+     */
+    function setKind(kind) {
+        optionKind = kind;
+        initialize(apiData, optionKind);
+    }
+    function setKindBool(){
+      // true  = radar, false  = statilite
+      if(optionKind = 'radar')  {
+        console.log(optionKind);
+      setKind('satellite');
+      console.log(optionKind);
+      return;
+      }else {
+        setKind('radar');
+        console.log("r");
+        return;
+      }
+      
+    }
+
+
+    function setColors() {
+        var e = document.getElementById('colors');
+        optionColorScheme = e.options[e.selectedIndex].value;
+        initialize(apiData, optionKind);
+    }
+
+
+    /**
+     * Handle arrow keys for navigation between next \ prev frames
+     */
+   
+</script>
+
+      
     </body>
     
 </html>
