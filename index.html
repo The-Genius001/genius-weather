@@ -34,9 +34,7 @@
     </head>
     <body onload="getLocation()">
 
-        <button onclick="getLocation()">get location</button>
-        <button onclick="getCords()">get Cords</button>
-        <button onclick="getForcast()">get forcast</button>
+        
         <p id="p"></p>
         <div>
           <link href="./home.css" rel="stylesheet" />
@@ -46,7 +44,7 @@
                 <h1 id="day 0">Day</h1>
                 <h2 id="temp 0" class="home-text01">Temp</h2>
                 <span id="info 0" class="home-text02">Info</span>
-                <span class="home-text03">SEE MORE</span>
+                <span onclick="window.location.href = '0.html';" class="home-text03">SEE MORE</span>
               </div>
               <div class="home-container02">
                 <div class="home-feature-card1">
@@ -83,25 +81,25 @@
                 <h1 id="temp 1">Temp</h1>
                 <h2 id="day 1" class="home-text11">Day</h2>
                 <span id="info 1" class="home-text12">info</span>
-                <span id="more 1" class="home-text13">SEE MORE</span>
+                <span onclick="window.location.href = '1.html';" id="more 1" class="home-text13">SEE MORE</span>
               </div>
               <div class="home-feature-card5">
                 <h1 id="temp 2">Temp</h1>
-                <h2 id="day 2" class="home-text15">Day</h2>
-                <span id="info 2" class="home-text16">info</span>
-                <span id="more 1" class="home-text17">SEE MORE</span>
+                <h2 id="day 2" class="home-text11">Day</h2>
+                <span id="info 2" class="home-text12">info</span>
+                
               </div>
               <div class="home-feature-card6">
                 <h1 id="temp 3">Temp</h1>
                 <h2 id="day 3" class="home-text19">Day</h2>
                 <span id="info 3" class="home-text20">info</span>
-                <span id="more 1" class="home-text21">SEE MORE</span>
+                <span onclick="window.location.href = '2.html';" id="more 1" class="home-text13">SEE MORE</span>
               </div>
               <div class="home-feature-card7">
                 <h1 id="temp 4">Temp</h1>
                 <h2 id="day 4" class="home-text23">Day</h2>
                 <span id="info 4" class="home-text24">info</span>
-                <span id="more 1" class="home-text25">SEE MORE</span>
+                
               </div>
             </div>
             <div id="map" class="home-container04" >
@@ -119,25 +117,25 @@
                   ></path>
                 </svg>
               </button>
-              <div id="&lt;" class="home-container07">
+              <button onclick="stop(); showFrame(animationPosition - 1);" id="&lt;" class="home-container07">
                 <svg viewBox="0 0 1024 1024" class="home-icon10">
                   <path
                     d="M512 1024c282.77 0 512-229.23 512-512s-229.23-512-512-512-512 229.23-512 512 229.23 512 512 512zM512 96c229.75 0 416 186.25 416 416s-186.25 416-416 416-416-186.25-416-416 186.25-416 416-416zM704 672l-224-160 224-160zM448 672l-224-160 224-160z"
                   ></path>
                 </svg>
-              </div>
-              <div id="&gt;" class="home-container08">
+              </button>
+              <button onclick="stop(); showFrame(animationPosition + 1);" id="&gt;" class="home-container08">
                 <svg viewBox="0 0 1024 1024" class="home-icon12">
                   <path
                     d="M512 0c-282.77 0-512 229.23-512 512s229.23 512 512 512 512-229.23 512-512-229.23-512-512-512zM512 928c-229.75 0-416-186.25-416-416s186.25-416 416-416 416 186.25 416 416-186.25 416-416 416zM320 352l224 160-224 160zM576 352l224 160-224 160z"
                   ></path>
                 </svg>
-              </div>
-              <div id="play" class="home-container09">
+              </button>
+              <button onclick="playStop()" id="play" class="home-container09">
                 <svg viewBox="0 0 1024 1024" class="home-icon14">
                   <path d="M342 214l468 298-468 298v-596z"></path>
                 </svg>
-              </div>
+              </button>
               <div id="mapid" class="home-container10"></div>
             </div>
           </div>
@@ -619,7 +617,7 @@
 
         </style>
 
-export default Home
+
 
         
         
@@ -735,7 +733,7 @@ export default Home
           
 
         </script>
-        
+        <span onclick="window.location.href = 'creddits.txt';">Credits</span>
           <script>
             var map = null
             function init(){

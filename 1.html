@@ -1,0 +1,332 @@
+<html>
+    <head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <style data-tag="reset-style-sheet">
+            html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+          </style>
+          <style data-tag="default-style-sheet">
+            
+            html {
+              font-family: Inter;
+              font-size: 16px;
+            }
+      
+            body {
+              font-weight: 400;
+              font-style:normal;
+              text-decoration: none;
+              text-transform: none;
+              letter-spacing: normal;
+              line-height: 1.15;
+              color: var(--dl-color-gray-black);
+              background-color: var(--dl-color-gray-white);
+      
+            }
+          </style>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            data-tag="font"
+          />
+          <link rel="stylesheet" href="./style.css" />
+          <link rel="stylesheet" href="./1.css"/>
+          
+    </head>
+    <body onload="getLocation()">
+      <div>
+        <link href="./component-1.css" rel="stylesheet" />
+        <div class="component-1-container">
+          <div class="component-1-container01">
+            <h1 id="Tittle" class="component-1-text">Day</h1>
+          </div>
+          <div class="component-1-container02">
+            <div class="component-1-container03">
+              <h1 class="component-1-text1">Hourly Wind</h1>
+            </div>
+            <canvas id="wchart" class="component-1-container04"></canvas>
+            <div id="dir" class="component-1-container05">
+              <button onclick="SwitchWind()" viewBox="0 0 877.7142857142857 1024" class="component-1-icon">
+                <path
+                  d="M365.714 621.714l146.286-73.143-146.286-73.143v146.286zM585.143 284v309.714l-292.571 146.286v-309.714zM749.714 512c0-171.429-139.429-310.857-310.857-310.857s-310.857 139.429-310.857 310.857 139.429 310.857 310.857 310.857 310.857-139.429 310.857-310.857zM877.714 512c0 242.286-196.571 438.857-438.857 438.857s-438.857-196.571-438.857-438.857 196.571-438.857 438.857-438.857 438.857 196.571 438.857 438.857z"
+                ></path>
+              </button>
+            </div>
+          </div>
+          <div class="component-1-container06">
+            <div class="component-1-container07">
+              <h1 class="component-1-text2">
+                <span>Hourly Temp</span>
+                <br />
+              </h1>
+            </div>
+            <canvas id="tchart" class="component-1-container08"></canvas>
+          </div>
+          <div class="component-1-container09">
+            <div class="component-1-container10">
+              <h1 class="component-1-text5">
+                <span>Per. %</span>
+                <br />
+              </h1>
+            </div>
+            <canvas id="pchart" class="component-1-container11"></canvas>
+          </div>
+        </div>
+      </div>
+      
+          <script>
+           
+            </script>
+          <script>
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let longitude = null;
+            let latitude = null;
+            let flink=null;
+            let forcast = null
+            let zoneID=null;
+            let RadarStation=null
+            let name=null;
+            let df=null;
+            let temp=null;
+            let winds=null;
+            let windd=null;
+            let per = null;
+            let dew = null;
+            let loc = null;
+            let hourTemp= null;
+             hour = null;
+             let txValues = new Array();
+             let tyValues = new Array();
+             let pxValues = new Array();
+             let pyValues = new Array();
+             let wxValues = new Array();
+             let wcValues = new Array();
+             let bool = null;
+                function getLocation(){
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                            latitude = position.coords.latitude;
+                            longitude = position.coords.longitude;
+                            console.log("Latitude:", latitude);
+                            console.log("Longitude:", longitude);
+                           
+                            // Use the latitude and longitude values in your code
+                            getCords();
+                            
+                            //L.map('mapid').setView(latlng, 6);
+                            //return true;
+                        },
+                            (error) => {
+                            console.error("Error getting geolocation:", error);
+                            //return false;
+                        }
+                        );
+                        } else {
+                            console.error("Geolocation is not supported by this browser.");
+                            //return false
+                        }
+                    
+                }
+                function getCords(){
+                    const url = 'https://api.weather.gov/points/'+latitude+','+longitude;
+                    console.log(url);
+                    const apiKey = 'YOUR_API_KEY';
+
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        flink= data.properties.forecast;
+                        //zoneID=data.properties.gridId;
+                        console.log(flink);
+                        getForcast();
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                      
+                }
+                function getForcast(){
+                    const url = flink
+                    console.log(url);
+                    //for(let i = 0; i<5; i++){
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+                    
+                    .then((data) => {
+                        
+                        forcast = data.properties.periods.slice(0,40)
+                        //let name = day;
+                        df = data.properties.periods[1].shortForecast;
+                        console.log(name);
+                        console.log(df);
+                        
+                        //console.log("hello world");
+                       hourly();
+                       //let xValues = data.properties.periods.slice(0, 23).temperature;
+                     //console.log(data.properties.periods+"hello");
+                      //let yValues = null;
+
+                    })
+                  
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                  }
+                    
+                //}
+                function hours(){
+                    const url = flink+"/hourly"
+                    //console.log(url);
+                    for(let i = 0; i<24; i++){
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+                    
+                    .then((data) => {
+                    
+                     const hour=new Date(data.properties.updated);
+                     hour.setHours(hour.getHours()+i);
+                     let day = days[hour.getDay()+1];
+                     document.getElementById("Tittle").innerHTML = day;
+                        if(hour.getHours()>12){
+                            //document.getElementById("hour"+i).innerHTML = hour.getHours()-12+":00";
+                            //document.getElementById("whour"+i).innerHTML = hour.getHours()-12+":00";
+                            //document.getElementById("phour"+i).innerHTML = hour.getHours()-12+":00";
+                            tyValues[i]=hour.getHours()-12;
+                        }else{
+                            //document.getElementById("hour"+i).innerHTML = hour.getHours()+":00";
+                            //document.getElementById("whour"+i).innerHTML = hour.getHours()+":00";
+                            //document.getElementById("phour"+i).innerHTML = hour.getHours()+":00";
+                            tyValues[i]=hour.getHours();
+                        }
+                    });
+                }
+            }
+                function hourly(){
+                    const url = flink+"/hourly"
+                    console.log(url);
+                    hours();
+                    for(let i = 0; i<26; i++){
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+
+                
+                    
+                    .then((data) => {
+                     
+                       if(i>24){
+                        drawCharts();
+                       }else{
+                        txValues[i]=data.properties.periods[i+24].temperature;
+                     wind=data.properties.periods[i+24].windSpeed;
+                     pxValues[i]=data.properties.periods[i+24].probabilityOfPrecipitation.value;
+                     wxValues[i]=data.properties.periods[i+24].windSpeed.split(" ")[0];
+                     
+                     wcValues[i]=tyValues[i]+ ":00 " +data.properties.periods[i+24].windDirection;
+                     console.log(wcValues);
+                    //document.getElementById("temp"+i).innerHTML = hourTemp+"°F";
+                    //document.getElementById("wind"+i).innerHTML = wind;
+                    //xValues[i]=hourTemp;
+                    
+                    //console.log(hourTemp);
+                       //console.log(xValues[i]);
+                       //console.log(hour.getHours());
+                        //console.log(yValues);
+                       }
+
+                    })
+                  
+                    .catch((error) => {
+                        console.error('Error:', error);
+                   
+                    });
+                }
+                
+            }
+            function drawCharts(){
+              
+              console.log("chart renderd")
+            new Chart("tchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  data: txValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min: txValues.sort(function(a,b){return a-b})[0]-5, max: txValues.sort(function(a, b){return b - a})[0]+5}}],
+                }
+              }
+            });
+            new Chart("pchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  data: pxValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min:0, max: 100}}],
+                }
+              }
+            });
+            new Chart("wchart", {
+              type: "line",
+              data: {
+                labels: wcValues.slice(0,24),
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  //data: wxValues
+                  data:wxValues.slice(0, 24)
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min:0, max: 25}}],
+                }
+              }
+            });
+            }
+            
+          
+         
+          
+          </script>
+    </body>
+</html>
