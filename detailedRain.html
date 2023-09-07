@@ -1,0 +1,627 @@
+<html>
+    <head>
+        <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
+        
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+      
+          <style data-tag="reset-style-sheet">
+            html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+          </style>
+          <style data-tag="default-style-sheet">
+            html {
+              font-family: Inter;
+              font-size: 16px;
+            }
+      
+            body {
+              font-weight: 400;
+              font-style:normal;
+              text-decoration: none;
+              text-transform: none;
+              letter-spacing: normal;
+              line-height: 1.15;
+              color: var(--dl-color-gray-black);
+              background-color: var(--dl-color-gray-white);
+      
+            }
+          </style>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            data-tag="font"
+          />
+          <link rel="stylesheet" href="./style.css" />
+          <link rel="stylesheet" href="./rain.css"/>
+    </head>
+    <body onload = "getLocation()">
+        <div>
+            <link href="./rain.css" rel="stylesheet" />
+            <div class="rain-container">
+              <div class="rain-container01">
+                <h1 id="Tittle" class="rain-heading">
+                  <span>Rain</span>
+                  <br />
+                </h1>
+              </div>
+              <div id="map" class="rain-container02">
+                <div id="cloud" class="rain-container03">
+                  <svg viewBox="0 0 1024 1024" class="rain-icon">
+                    <path
+                      d="M640 554.667v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM298.667 554.667v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM469.333 640v341.333c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-341.333c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM870.443 746.496c64.725-28.373 111.915-80.341 135.723-141.312s24.405-131.157-3.925-195.883c-24.491-55.936-66.688-98.859-117.419-124.8-35.669-18.261-75.52-28.16-116.48-28.501h-22.528c-30.933-87.765-91.435-158.208-167.040-202.795-84.608-49.877-188.373-67.499-291.029-41.003s-184.917 92.203-234.795 176.811-67.499 188.373-41.003 291.029c21.717 84.053 69.717 154.581 132.224 204.075 18.475 14.635 45.312 11.52 59.947-6.955s11.52-45.312-6.955-59.947c-48.299-38.272-85.675-92.971-102.613-158.549-20.608-79.829-6.955-160.427 31.915-226.347s102.741-116.864 182.613-137.515 160.469-6.955 226.347 31.915 116.864 102.741 137.515 182.613c4.907 18.56 21.547 32 41.301 32h53.419c27.605 0.213 54.4 6.912 78.251 19.115 33.835 17.323 61.824 45.781 78.165 83.072 18.901 43.179 18.56 89.856 2.645 130.603s-47.317 75.307-90.496 94.208c-21.589 9.472-31.403 34.603-21.973 56.192s34.603 31.403 56.192 21.973z"
+                    ></path>
+                  </svg>
+                </div>
+                <div id="cloud" class="rain-container04">
+                  <svg viewBox="0 0 1024 1024" class="rain-icon02">
+                    <path
+                      d="M826 428q82 6 140 67t58 145q0 88-63 151t-151 63h-554q-106 0-181-75t-75-181q0-94 67-169t161-85q42-78 118-126t166-48q108 0 201 76t113 182z"
+                    ></path>
+                  </svg>
+                </div>
+                <div id="&lt;" class="rain-container05">
+                  <svg viewBox="0 0 1024 1024" class="rain-icon04">
+                    <path
+                      d="M512 1024c282.77 0 512-229.23 512-512s-229.23-512-512-512-512 229.23-512 512 229.23 512 512 512zM512 96c229.75 0 416 186.25 416 416s-186.25 416-416 416-416-186.25-416-416 186.25-416 416-416zM704 672l-224-160 224-160zM448 672l-224-160 224-160z"
+                    ></path>
+                  </svg>
+                </div>
+                <div id="&gt;" class="rain-container06">
+                  <svg viewBox="0 0 1024 1024" class="rain-icon06">
+                    <path
+                      d="M512 0c-282.77 0-512 229.23-512 512s229.23 512 512 512 512-229.23 512-512-229.23-512-512-512zM512 928c-229.75 0-416-186.25-416-416s186.25-416 416-416 416 186.25 416 416-186.25 416-416 416zM320 352l224 160-224 160zM576 352l224 160-224 160z"
+                    ></path>
+                  </svg>
+                </div>
+                <div id="play" class="rain-container07">
+                  <svg viewBox="0 0 1024 1024" class="rain-icon08">
+                    <path d="M342 214l468 298-468 298v-596z"></path>
+                  </svg>
+                </div>
+                <div id="mapid" class="rain-container08"></div>
+              </div>
+              <div class="rain-container09">
+                <div class="rain-container10"><h1 class="rain-text02">Rain</h1></div>
+                <canvas id="rchart" class="rain-container11" style="max-width: 605px; max-height: 293px;"></canvas>
+              </div>
+              <div class="rain-container12">
+                <div class="rain-container13">
+                  <h1 class="rain-text03">
+                    <span>Dew Point</span>
+                    <br />
+                    <br />
+                  </h1>
+                </div>
+                <canvas id="dchart" class="rain-container14" style="max-width: 605px; max-height: 293px;" ></canvas>
+              </div>
+              <div class="rain-container15">
+                <div class="rain-container16">
+                  <h1 class="rain-text07">
+                    <span>Humidity</span>
+                    <br />
+                  </h1>
+                </div>
+                <canvas id="hchart" class="rain-container17" style="max-width: 605px; max-height: 293px;"></canvas>
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+            let longitude = null;
+            let latitude = null;
+            let flink=null;
+            let forcast = null
+            let zoneID=null;
+            let RadarStation=null
+            let name=null;
+            let df=null;
+            let temp=null;
+            let winds=null;
+            let windd=null;
+            let per = null;
+            let dew = null;
+            let loc = null;
+            let hourTemp= null;
+             hour = null;
+             let txValues = new Array();
+             let tyValues = new Array();
+             let pxValues = new Array();
+             let pyValues = new Array();
+             let wxValues = new Array();
+             let wcValues = new Array();
+             let bool = null;
+                function getLocation(){
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                            latitude = position.coords.latitude;
+                            longitude = position.coords.longitude;
+                            console.log("Latitude:", latitude);
+                            console.log("Longitude:", longitude);
+                           
+                            // Use the latitude and longitude values in your code
+                            getCords();
+                            
+                            //L.map('mapid').setView(latlng, 6);
+                            //return true;
+                        },
+                            (error) => {
+                            console.error("Error getting geolocation:", error);
+                            //return false;
+                        }
+                        );
+                        } else {
+                            console.error("Geolocation is not supported by this browser.");
+                            //return false
+                        }
+                    
+                }
+                function getCords(){
+                    const url = 'https://api.weather.gov/points/'+latitude+','+longitude;
+                    console.log(url);
+                    //const apiKey = 'YOUR_API_KEY';
+
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        flink= data.properties.forecast;
+                        //zoneID=data.properties.gridId;
+                        console.log(flink);
+                        getForcast();
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                      
+                }
+                function getForcast(){
+                    const url = flink
+                    console.log(url);
+                    //for(let i = 0; i<5; i++){
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+                    
+                    .then((data) => {
+                        
+                        forcast = data.properties.periods.slice(0,40)
+                        //let name = day;
+                        df = data.properties.periods[1].shortForecast;
+                        console.log(name);
+                        console.log(df);
+                        
+                        //console.log("hello world");
+                       hourly();
+                       //let xValues = data.properties.periods.slice(0, 23).temperature;
+                     //console.log(data.properties.periods+"hello");
+                      //let yValues = null;
+
+                    })
+                  
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                  }
+                    
+                //}
+                function hours(){
+                    const url = flink+"/hourly"
+                    console.log(url);
+                    //console.log(url);
+                    for(let i = 0; i<24; i++){
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+                    
+                    .then((data) => {
+                      const hour=new Date(data.properties.updated);
+                     hour.setHours(hour.getHours()+i);
+                     let day = days[hour.getDay()+1];
+                     document.getElementById("Tittle").innerHTML = day;
+                        if(hour.getHours()>12){
+                            //document.getElementById("hour"+i).innerHTML = hour.getHours()-12+":00";
+                            //document.getElementById("whour"+i).innerHTML = hour.getHours()-12+":00";
+                            //document.getElementById("phour"+i).innerHTML = hour.getHours()-12+":00";
+                            tyValues[i]=hour.getHours()-12;
+                        }else{
+                            //document.getElementById("hour"+i).innerHTML = hour.getHours()+":00";
+                            //document.getElementById("whour"+i).innerHTML = hour.getHours()+":00";
+                            //document.getElementById("phour"+i).innerHTML = hour.getHours()+":00";
+                            tyValues[i]=hour.getHours();
+                        }
+                    });
+                }
+            }
+            function conlen(hour){
+                x
+            }
+                function hourly(){
+                    const url = flink+"/hourly"
+                    console.log(url);
+                    hours();
+                    
+                    fetch(url, {
+                        headers: {
+                            'User-Agent': 'Mozilla/5.0', 
+                        },
+                    })
+                    
+                    .then((response) => response.json())
+
+                
+                    
+                    .then((data) => {
+                      for(let i = 0; i<26; i++){
+                       if(i>24){
+                        drawCharts();
+                       }else{
+                        pxValues[i]=data.properties.periods[i].relativeHumidity.value;
+                     wind=data.properties.periods[i].windSpeed;
+                     txValues[i]=data.properties.periods[i].probabilityOfPrecipitation.value;
+                     wxValues[i]=data.properties.periods[i].dewpoint.value;
+                     console.log(pxValues);
+                     console.log(txValues);
+                     console.log(wxValues);
+                     //drawCharts();
+                     //wcValues[i]=tyValues[i]+ ":00 " +data.properties.periods[i].windDirection;
+                     //console.log(wcValues);
+                    //document.getElementById("temp"+i).innerHTML = hourTemp+"°F";
+                    //document.getElementById("wind"+i).innerHTML = wind;
+                    //xValues[i]=hourTemp;
+                    
+                    //console.log(hourTemp);
+                       //console.log(xValues[i]);
+                       //console.log(hour.getHours());
+                        //console.log(yValues);
+                       }
+                      }
+                    })
+                  
+                    .catch((error) => {
+                        console.error('Error:', error);
+                   
+                    });
+                }
+                
+            
+            function drawCharts(){
+              init()
+              console.log("chart renderd")
+            new Chart("rchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  data: txValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min: txValues.sort(function(a,b){return a-b})[0], max: 100}}],
+                }
+              }
+            });
+            new Chart("hchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  data: pxValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min:0, max: 100}}],
+                }
+              }
+            });
+            new Chart("dchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  //data: wxValues
+                  //data:wxValues
+                  data:wxValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min:0, max: 25}}],
+                }
+              }
+            });
+            }
+            
+          
+         
+            new Chart("tchart", {
+              type: "line",
+              data: {
+                labels: tyValues,
+                datasets: [{
+                  fill: false,
+                  lineTension: 0,
+                  backgroundColor: "rgba(0,0,255,1.0)",
+                  borderColor: "rgba(0,0,255,0.1)",
+                  //data: wxValues
+                  //data:wxValues
+                  data:txValues
+                }]
+              },
+              options: {
+                legend: {display: false},
+                scales: {
+                  yAxes: [{ticks: {min:0, max: 25}}],
+                }
+              }
+            });
+            
+          </script>
+          </script>
+          <script>
+            var map = null
+            function init(){
+                map = L.map('mapid').setView([latitude, longitude], 6);
+
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attributions: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+              }).addTo(map);
+              /**
+              * Load all the available maps frames from RainViewer API
+              */
+             var apiRequest = new XMLHttpRequest();
+             apiRequest.open("GET", "https://api.rainviewer.com/public/weather-maps.json", true);
+              apiRequest.onload = function(e) {
+              // store the API response for re-use purposes in memory
+            apiData = JSON.parse(apiRequest.response);
+            initialize(apiData, optionKind);
+              };
+          apiRequest.send();
+
+            }
+   
+    
+    /**
+     * RainViewer radar animation part
+     * @type {number[]}
+     */
+    var apiData = {};
+    var mapFrames = [];
+    var lastPastFramePosition = -1;
+    var radarLayers = [];
+
+    var optionKind = 'radar'; // can be 'radar' or 'satellite'
+
+    var optionTileSize = 256; // can be 256 or 512.
+    var optionColorScheme = 2; // from 0 to 8. Check the https://rainviewer.com/api/color-schemes.html for additional information
+    var optionSmoothData = 1; // 0 - not smooth, 1 - smooth
+    var optionSnowColors = 1; // 0 - do not show snow colors, 1 - show snow colors
+
+    var animationPosition = 0;
+    var animationTimer = false;
+
+    var loadingTilesCount = 0;
+    var loadedTilesCount = 0;
+    var kind = true;
+
+    function startLoadingTile() {
+        loadingTilesCount++;    
+    }
+    function finishLoadingTile() {
+        // Delayed increase loaded count to prevent changing the layer before 
+        // it will be replaced by next
+        setTimeout(function() { loadedTilesCount++; }, 250);
+    }
+    function isTilesLoading() {
+        return loadingTilesCount > loadedTilesCount;
+    }
+
+   
+
+    /**
+     * Initialize internal data from the API response and options
+     */
+    function initialize(api, kind) {
+        // remove all already added tiled layers
+        for (var i in radarLayers) {
+            map.removeLayer(radarLayers[i]);
+        }
+        mapFrames = [];
+        radarLayers = [];
+        animationPosition = 0;
+
+        if (!api) {
+            return;
+        }
+        if (kind == 'satellite' && api.satellite && api.satellite.infrared) {
+            mapFrames = api.satellite.infrared;
+
+            lastPastFramePosition = api.satellite.infrared.length - 1;
+            showFrame(lastPastFramePosition, true);
+        }
+        else if (api.radar && api.radar.past) {
+            mapFrames = api.radar.past;
+            if (api.radar.nowcast) {
+                mapFrames = mapFrames.concat(api.radar.nowcast);
+            }
+
+            // show the last "past" frame
+            lastPastFramePosition = api.radar.past.length - 1;
+            showFrame(lastPastFramePosition, true);
+        }
+    }
+
+    /**
+     * Animation functions
+     * @param path - Path to the XYZ tile
+     */
+    function addLayer(frame) {
+        if (!radarLayers[frame.path]) {
+            var colorScheme = optionKind == 'satellite' ? 0 : optionColorScheme;
+            var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
+            var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
+
+            var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
+                tileSize: 256,
+                opacity: 0.01,
+                zIndex: frame.time
+            });
+
+            // Track layer loading state to not display the overlay 
+            // before it will completelly loads
+            source.on('loading', startLoadingTile);
+            source.on('load', finishLoadingTile); 
+            source.on('remove', finishLoadingTile);
+
+            radarLayers[frame.path] = source;
+        }
+        if (!map.hasLayer(radarLayers[frame.path])) {
+            map.addLayer(radarLayers[frame.path]);
+        }
+    }
+
+    /**
+     * Display particular frame of animation for the @position
+     * If preloadOnly parameter is set to true, the frame layer only adds for the tiles preloading purpose
+     * @param position
+     * @param preloadOnly
+     * @param force - display layer immediatelly
+     */
+    function changeRadarPosition(position, preloadOnly, force) {
+        while (position >= mapFrames.length) {
+            position -= mapFrames.length;
+        }
+        while (position < 0) {
+            position += mapFrames.length;
+        }
+
+        var currentFrame = mapFrames[animationPosition];
+        var nextFrame = mapFrames[position];
+
+        addLayer(nextFrame);
+
+        // Quit if this call is for preloading only by design
+        // or some times still loading in background
+        if (preloadOnly || (isTilesLoading() && !force)) {
+            return;
+        }
+
+        animationPosition = position;
+
+        if (radarLayers[currentFrame.path]) {
+            radarLayers[currentFrame.path].setOpacity(0);
+        }
+        radarLayers[nextFrame.path].setOpacity(100);
+
+
+        var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
+
+        //document.getElementById("timestamp").innerHTML = pastOrForecast + ': ' + (new Date(nextFrame.time * 1000)).toString();
+    }
+
+    /**
+     * Check avialability and show particular frame position from the timestamps list
+     */
+    function showFrame(nextPosition, force) {
+        var preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
+
+        changeRadarPosition(nextPosition, false, force);
+
+        // preload next next frame (typically, +1 frame)
+        // if don't do that, the animation will be blinking at the first loop
+        changeRadarPosition(nextPosition + preloadingDirection, true);
+    }
+
+    /**
+     * Stop the animation
+     * Check if the animation timeout is set and clear it.
+     */
+    function stop() {
+        if (animationTimer) {
+            clearTimeout(animationTimer);
+            animationTimer = false;
+            return true;
+        }
+        return false;
+    }
+
+    function play() {
+        showFrame(animationPosition + 1);
+
+        // Main animation driver. Run this function every 500 ms
+        animationTimer = setTimeout(play, 300);
+    }
+
+    function playStop() {
+        if (!stop()) {
+            play();
+        } 
+    }
+
+    /**
+     * Change map options
+     */
+    function setKind(kind) {
+        optionKind = kind;
+        initialize(apiData, optionKind);
+    }
+    function setKindBool(){
+      // true  = radar, false  = statilite
+      if(optionKind = 'radar')  {
+        console.log(optionKind);
+      setKind('satellite');
+      console.log(optionKind);
+      return;
+      }else {
+        setKind('radar');
+        console.log("r");
+        return;
+      }
+      
+    }
+
+
+    function setColors() {
+        var e = document.getElementById('colors');
+        optionColorScheme = e.options[e.selectedIndex].value;
+        initialize(apiData, optionKind);
+    }
+
+
+    /**
+     * Handle arrow keys for navigation between next \ prev frames
+     */
+   
+</script>
+    </body>
+</html>
