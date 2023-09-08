@@ -81,25 +81,25 @@
                 <h1 id="temp 1">Temp</h1>
                 <h2 id="day 1" class="home-text11">Day</h2>
                 <span id="info 1" class="home-text12">info</span>
-                
+                <span onclick="window.location.href = '1.html';" id="more 1" class="home-text13">SEE MORE</span>
               </div>
               <div class="home-feature-card5">
                 <h1 id="temp 2">Temp</h1>
                 <h2 id="day 2" class="home-text11">Day</h2>
                 <span id="info 2" class="home-text12">info</span>
-                <span onclick="window.location.href = '1.html';" id="more 1" class="home-text13">SEE MORE</span>
+                <span onclick="window.location.href = '1.html';" id="more 2" class="home-text13">SEE MORE</span>
               </div>
               <div class="home-feature-card6">
                 <h1 id="temp 3">Temp</h1>
                 <h2 id="day 3" class="home-text19">Day</h2>
                 <span id="info 3" class="home-text20">info</span>
-                
+                <span onclick="window.location.href = '2.html';" id="more 3" class="home-text13">SEE MORE</span>
               </div>
               <div class="home-feature-card7">
                 <h1 id="temp 4">Temp</h1>
                 <h2 id="day 4" class="home-text23">Day</h2>
                 <span id="info 4" class="home-text24">info</span>
-                <span onclick="window.location.href = '2.html';" id="more 1" class="home-text13">SEE MORE</span>
+                <span onclick="window.location.href = '2.html';" id="more 4" class="home-text13">SEE MORE</span>
               </div>
             </div>
             <div id="map" class="home-container04" >
@@ -637,6 +637,7 @@
             let per = null;
             let dew = null;
             let loc = null;
+            let firstDay = null;
                 function getLocation(){
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(
@@ -698,6 +699,9 @@
                     .then((response) => response.json())
                     
                     .then((data) => {
+                      if (i<1){
+                        firstDay = data.properties.periods[0].name;
+                      }                     
                         forcast = data.properties.periods.slice(0,5)
                         name = data.properties.periods[i].name;
                         df = data.properties.periods[i].shortForecast;
@@ -716,7 +720,7 @@
                         document.getElementById("day "+i).innerHTML = name;
                         document.getElementById("info "+i).innerHTML = df;
                         console.log("hello world");
-                       
+                       setInfo();
 
                     })
                   
@@ -725,6 +729,21 @@
                     });
                   }
                     
+                }
+                function setInfo(){
+                  if (firstDay="Tonight"){
+                    console.log(1);
+                    //document.getElementById("more 2").style.setOpacity(100);
+                    //document.getElementById("more 2").style.setOpacity(100);
+                    //document.getElementById("more 4").style.setOpacity(100);
+                    //document.getElementById("more 1").style.setOpacity(0);
+                    document.getElementById("more 1").style.visibility = "hidden";
+                    document.getElementById('more 3').style.visibility = 'hidden';
+                  }else{
+                    console.log(2)
+                    document.getElementById("more 2").style.visibility = "hidden";
+                    document.getElementById('more 4').style.visibility = 'hidden';
+                  }
                 }
                 
 
@@ -962,6 +981,7 @@
         optionColorScheme = e.options[e.selectedIndex].value;
         initialize(apiData, optionKind);
     }
+    
 
 
     /**
