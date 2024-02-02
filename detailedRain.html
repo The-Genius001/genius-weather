@@ -230,7 +230,7 @@
                     .then((data) => {
                       const hour=new Date(data.properties.updated);
                      hour.setHours(hour.getHours()+i);
-                     let day = days[hour.getDay()+1];
+                     let day = days[hour.getDay()];
                      document.getElementById("Tittle").innerHTML = day;
                         if(hour.getHours()>12){
                             //document.getElementById("hour"+i).innerHTML = hour.getHours()-12+":00";

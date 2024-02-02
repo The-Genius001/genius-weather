@@ -716,7 +716,7 @@ import { getFirestore } from "firebase/firestore";
                         dew = data.properties.periods[0].dewpoint.value;
                         console.log(name);
                         console.log(df);
-                        document.getElementById("dew").innerHTML = dew;
+                        document.getElementById("dew").innerHTML = dew*1.8+32;
                         document.getElementById("per").innerHTML = per;
                         document.getElementById("winds").innerHTML = winds;
                         document.getElementById("windd").innerHTML = windd;
