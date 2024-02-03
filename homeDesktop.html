@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="script.js"></script>
+    <title>homeDesktop - Masculine Positive Raccoon</title>
+    <meta
+      property="og:title"
+      content="Weather"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+  
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+  
+  </head>
+  <body onload="init()">
+    <link rel="stylesheet" href="./style.css" />
+    <div id="imggg"">
+      <link href="./home-desktop.css" rel="stylesheet" />
+
+      <div class="home-desktop-container">
+        <div class="home-desktop-container01">
+          <div class="home-desktop-container02">
+            <div class="home-desktop-container03">
+              <div class="home-desktop-container04">
+                <h1 id="day0" class="home-desktop-text">Sunday</h1>
+                <span id="temp0" class="home-desktop-text01">87</span>
+                <span class="home-desktop-text02">
+                  Partly cloudy with a chance of meetballs!
+                </span>
+                <button
+                  type="button"
+                  name="daymore"
+                  class="home-desktop-button button"
+                >
+                  See More
+                </button>
+              </div>
+              <div class="home-desktop-container05">
+                <div class="home-desktop-container06">
+                  <span id="wi" class="home-desktop-text03">Wind</span>
+                  <span id="winds" class="home-desktop-text04">
+                    <span>3 MPH</span>
+                    <br />
+                    <br />
+                    <span>NWE</span>
+                    <br />
+                  </span>
+                  <button
+                    type="button"
+                    name="windmore"
+                    class="home-desktop-button1 button"
+                  >
+                    See More
+                  </button>
+                </div>
+                <div class="home-desktop-container07">
+                  <span class="home-desktop-text10">Dew Point</span>
+                  <span class="home-desktop-text11">
+                    <span>27</span>
+                    <br />
+                  </span>
+                  <button
+                    type="button"
+                    name="dewmore"
+                    class="home-desktop-button2 button"
+                  >
+                    See More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-desktop-container08">
+          <div class="home-desktop-container09">
+            <div class="home-desktop-container10">
+              <h1 class="home-desktop-text14">Rain</h1>
+              <div class="home-desktop-container11">
+                <div class="home-desktop-container12">
+                  <div id="mapid" class="home-desktop-container13">
+                    <span class="home-desktop-text15">Radar</span>
+                    <button
+                      type="button"
+                      name="radar more"
+                      class="home-desktop-button3 button"
+                    >
+                      Full Screen
+                    </button>
+                  </div>
+                </div>
+                <div class="home-desktop-container14">
+                  <div id="rchart" class="home-desktop-container15">
+                    <span class="home-desktop-text16">Hourly Rain</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                name="rain more"
+                class="home-desktop-button4 button"
+              >
+                <span>
+                  <span class="home-desktop-text18">See More</span>
+                  <br />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="home-desktop-container16">
+          <div class="home-desktop-container17">
+            <h1 class="home-desktop-text20">Wind</h1>
+            <div class="home-desktop-container18">
+              <div id="wcompass" class="home-desktop-container19">
+                <span class="home-desktop-text21">
+                  <span>Wind Compass</span>
+                  <br />
+                </span>
+              </div>
+              <div class="home-desktop-container20">
+                <div id="wchart" class="home-desktop-container21">
+                  <span class="home-desktop-text24">
+                    <span>Wind Speed</span>
+                    <br />
+                  </span>
+                </div>
+                <div id="wd chart" class="home-desktop-container22">
+                  <span class="home-desktop-text27">
+                    <span>Wind Dir</span>
+                    <br />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              name="windmore"
+              class="home-desktop-button5 button"
+            >
+              <span>
+                <span class="home-desktop-text31">See More</span>
+                <br />
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+
+
+</script>
